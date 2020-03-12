@@ -17,7 +17,7 @@ download-kustomize:
 
 .PHONY: download-certs
 download-certs:
-	az keyvault secret download --vault-name geneva-certs -n azcu-geneva-logs-test -e base64 -f cert.pfx
+	az keyvault secret download --vault-name aks-dataplane-test -n geneva-agent -e base64 -f cert.pfx
 	openssl pkcs12 -nocerts -nodes -passin pass: -in cert.pfx -out gcskey.pem && openssl rsa -in gcskey.pem -out config/gcskey.pem
 	openssl pkcs12 -nokeys -nodes -passin pass: -in cert.pfx -out gcscert.pem && openssl x509 -in gcscert.pem -out config/gcscert.pem
 	rm gcskey.pem gcscert.pem cert.pfx
